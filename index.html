@@ -6,7 +6,7 @@
     <title>Apresentação - Padrões de Desenvolvimento Domtec</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chosen Palette: Warm Neutrals (Slate, Zinc, Sky) -->
-    <!-- Application Structure Plan: A linear, slide-based web presentation. This structure directly follows the narrative of the source training script, which is the most effective way to present this content. Interaction is focused on sequential navigation (Next/Prev) to guide the user through the training modules. -->
+    <!-- Application Structure Plan: A linear, slide-based web presentation. This structure directly follows the narrative of the source training script, which is the most effective way to present this content. Interaction is focused on sequential navigation (Next/Prev) and a new fullscreen toggle to guide the user through the training modules. -->
     <!-- Visualization & Content Choices: Each slide's concept is represented by a visual diagram created using only structured HTML and Tailwind CSS, as per the NO SVG/Mermaid/Image constraint. For example, Slide 3 (Impact) uses concentric divs to create a ripple effect. Code snippets are presented in styled <pre><code> blocks for readability. The final slide includes the company logo as per user request. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
@@ -31,23 +31,49 @@
         .progress-dot {
             transition: background-color 0.3s ease;
         }
+        /* Styles for fullscreen mode */
+        main:-webkit-full-screen {
+            height: 100vh;
+            max-height: 100vh;
+        }
+        main:-moz-full-screen {
+            height: 100vh;
+            max-height: 100vh;
+        }
+        main:-ms-fullscreen {
+            height: 100vh;
+            max-height: 100vh;
+        }
+        main:fullscreen {
+            height: 100vh;
+            max-height: 100vh;
+        }
     </style>
 </head>
 <body class="bg-slate-100 text-slate-800 flex flex-col items-center justify-center min-h-screen p-4 overflow-hidden">
 
-    <main id="presentation-container" class="w-full max-w-5xl h-[80vh] max-h-[700px] bg-white rounded-2xl shadow-2xl flex flex-col p-8 md:p-12 overflow-hidden">
+    <main id="presentation-container" class="w-full max-w-5xl h-[80vh] max-h-[700px] bg-white rounded-2xl shadow-2xl flex flex-col p-8 md:p-12 overflow-hidden transition-all duration-300">
         
     </main>
 
     <footer class="w-full max-w-5xl mt-6 flex items-center justify-between">
-        <span id="slide-counter" class="text-sm font-semibold text-slate-500"></span>
-        <div class="flex items-center space-x-4">
+        <div class="w-1/3">
+             <span id="slide-counter" class="text-sm font-semibold text-slate-500"></span>
+        </div>
+        <div class="w-1/3 flex items-center justify-center space-x-4">
             <button id="prev-btn" class="px-6 py-2 bg-white rounded-lg shadow-md text-slate-700 font-semibold hover:bg-slate-50 transition disabled:opacity-50 disabled:cursor-not-allowed">
                 Anterior
             </button>
             <div id="progress-dots" class="flex items-center space-x-2"></div>
             <button id="next-btn" class="px-6 py-2 bg-sky-600 rounded-lg shadow-md text-white font-semibold hover:bg-sky-700 transition disabled:opacity-50">
                 Próximo
+            </button>
+        </div>
+        <div class="w-1/3 flex justify-end">
+            <button id="fullscreen-btn" title="Tela Cheia" class="p-2 bg-white rounded-lg shadow-md text-slate-500 font-semibold hover:bg-slate-50 hover:text-sky-600 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z"/>
+                </svg>
             </button>
         </div>
     </footer>
@@ -232,6 +258,7 @@ Validar(cdsDados.FieldByName('Nome').AsString = '', 'O campo Nome é obrigatóri
         const nextBtn = document.getElementById('next-btn');
         const slideCounter = document.getElementById('slide-counter');
         const progressDotsContainer = document.getElementById('progress-dots');
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
         
         function createVisual(slide) {
             if (typeof slide.visual === 'function') {
@@ -258,7 +285,6 @@ Validar(cdsDados.FieldByName('Nome').AsString = '', 'O campo Nome é obrigatóri
             `;
             presentationContainer.innerHTML = slideHtml;
             
-            // Force reflow to restart animation
             const slideElement = document.getElementById(`slide-${index}`);
             slideElement.classList.remove('active');
             void slideElement.offsetWidth;
@@ -292,15 +318,30 @@ Validar(cdsDados.FieldByName('Nome').AsString = '', 'O campo Nome é obrigatóri
                 progressDotsContainer.appendChild(dot);
             });
         }
+        
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                presentationContainer.requestFullscreen().catch(err => {
+                    alert(`Não foi possível ativar o modo de tela cheia: ${err.message} (${err.name})`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
 
         prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
         nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+        fullscreenBtn.addEventListener('click', toggleFullScreen);
         
         document.addEventListener('keydown', (e) => {
             if(e.key === 'ArrowRight') {
                 showSlide(currentSlide + 1);
             } else if (e.key === 'ArrowLeft') {
                 showSlide(currentSlide - 1);
+            } else if (e.key === 'f') {
+                toggleFullScreen();
             }
         });
 
