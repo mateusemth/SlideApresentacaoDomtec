@@ -33,22 +33,27 @@
         }
     </style>
 </head>
-<body class="bg-slate-100 text-slate-800 flex flex-col items-center justify-center min-h-screen p-4 overflow-hidden">
+<body class="bg-slate-100 text-slate-800 flex flex-col items-center justify-center min-h-screen p-2 sm:p-4 overflow-hidden">
 
-    <main id="presentation-container" class="w-full max-w-5xl h-[80vh] max-h-[700px] bg-white rounded-2xl shadow-2xl flex flex-col p-8 md:p-12 overflow-hidden">
+    <main id="presentation-container" class="w-full max-w-5xl h-auto min-h-[550px] md:h-[80vh] md:max-h-[700px] bg-white rounded-2xl shadow-2xl flex flex-col p-6 sm:p-8 md:p-12 overflow-hidden transition-all duration-300">
         
     </main>
 
-    <footer class="w-full max-w-5xl mt-6 flex items-center justify-between">
-        <span id="slide-counter" class="text-sm font-semibold text-slate-500"></span>
-        <div class="flex items-center space-x-4">
-            <button id="prev-btn" class="px-6 py-2 bg-white rounded-lg shadow-md text-slate-700 font-semibold hover:bg-slate-50 transition disabled:opacity-50 disabled:cursor-not-allowed">
+    <footer class="w-full max-w-5xl mt-4 sm:mt-6 flex flex-col sm:flex-row items-center justify-between gap-y-4">
+        <div class="w-full sm:w-1/3 order-2 sm:order-1 text-center sm:text-left">
+             <span id="slide-counter" class="text-sm font-semibold text-slate-500"></span>
+        </div>
+        <div class="w-full sm:w-1/3 order-1 sm:order-2 flex items-center justify-center space-x-4">
+            <button id="prev-btn" class="px-5 py-2 bg-white rounded-lg shadow-md text-slate-700 font-semibold hover:bg-slate-50 transition disabled:opacity-50 disabled:cursor-not-allowed">
                 Anterior
             </button>
             <div id="progress-dots" class="flex items-center space-x-2"></div>
-            <button id="next-btn" class="px-6 py-2 bg-sky-600 rounded-lg shadow-md text-white font-semibold hover:bg-sky-700 transition disabled:opacity-50">
+            <button id="next-btn" class="px-5 py-2 bg-sky-600 rounded-lg shadow-md text-white font-semibold hover:bg-sky-700 transition disabled:opacity-50">
                 Próximo
             </button>
+        </div>
+        <div class="w-full sm:w-1/3 order-3 flex justify-center sm:justify-end mt-2 sm:mt-0">
+            <!-- Fullscreen button removed -->
         </div>
     </footer>
 
@@ -184,7 +189,7 @@
             {
                 title: "Estudo de Caso: Padrão de Comunicação com Usuário",
                 subtitle: "Implementação com `pMensagem` & `MensagemFalha`",
-                content: `<p class="mb-2"><span class="font-bold">O Requisito (do Slide 6):</span> A comunicação com o usuário deve ser clara e funcional.</p>
+                content: `<p class="mb-2"><span class="font-bold">O Requisito (do Slide 5):</span> A comunicação com o usuário deve ser clara e funcional.</p>
                 <p class="mb-4"><span class="font-bold">A Implementação Padrão:</span> Estas funções garantem a consistência visual e funcional. O objetivo é guiar o usuário de forma produtiva.</p>
                 <pre class="bg-slate-800 text-white p-4 rounded-lg text-sm fira-code whitespace-pre-wrap"><code class="language-delphi">// O padrão foca em levar o usuário à SOLUÇÃO (focando o edtCodProduto).
 MensagemFalha('Produto não informado!', nil, edtCodProduto);</code></pre>`,
@@ -197,7 +202,7 @@ MensagemFalha('Produto não informado!', nil, edtCodProduto);</code></pre>`,
             {
                 title: "Estudo de Caso: Padrão de Validação de Dados",
                 subtitle: "Implementação com `Validar` & `ValidarSimNao`",
-                content: `<p class="mb-2"><span class="font-bold">O Requisito (dos Slides 4 e 5):</span> Regras de negócio devem ser explícitas e centralizadas para mitigar riscos.</p>
+                content: `<p class="mb-2"><span class="font-bold">O Requisito (dos Slides 4):</span> Regras de negócio devem ser explícitas e centralizadas para mitigar riscos.</p>
                 <p class="mb-4"><span class="font-bold">A Implementação Padrão:</span> A função \`Validar\` serve como documentação auditável da regra de negócio, evitando lógicas implícitas (\`if\`s) espalhadas.</p>
                 <pre class="bg-slate-800 text-white p-4 rounded-lg text-sm fira-code whitespace-pre-wrap"><code class="language-delphi">// Documenta a regra "O nome do cliente é obrigatório" em um ponto único e padronizado.
 Validar(cdsDados.FieldByName('Nome').AsString = '', 'O campo Nome é obrigatório!', edtNome);</code></pre>`,
@@ -245,20 +250,24 @@ Validar(cdsDados.FieldByName('Nome').AsString = '', 'O campo Nome é obrigatóri
             const visualHtml = createVisual(slide);
             
             const slideHtml = `
-                <div id="slide-${index}" class="slide w-full h-full flex-col md:flex-row items-center justify-center">
-                    <div class="w-full md:w-3/5 h-full flex flex-col justify-center pr-0 md:pr-10 text-center md:text-left">
-                        <h1 class="text-3xl lg:text-4xl font-bold text-slate-900">${slide.title}</h1>
-                        ${slide.subtitle ? `<h2 class="text-lg lg:text-xl font-semibold text-sky-600 mt-2">${slide.subtitle}</h2>` : ''}
-                        <div class="mt-6 text-slate-700 text-base lg:text-lg leading-relaxed space-y-2">${slide.content}</div>
-                    </div>
-                    <div class="hidden md:flex w-2/5 h-full items-center justify-center bg-slate-50 rounded-2xl overflow-hidden">
+                <div id="slide-${index}" class="slide w-full h-full flex flex-col items-center justify-center overflow-y-auto">
+                    <div class="md:hidden flex-shrink-0 mb-6 flex items-center justify-center h-24">
                         ${visualHtml}
+                    </div>
+                    <div class="w-full h-full flex flex-col md:flex-row items-center justify-center">
+                        <div class="w-full md:w-3/5 h-full flex flex-col justify-center pr-0 md:pr-10 text-center md:text-left">
+                            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900">${slide.title}</h1>
+                            ${slide.subtitle ? `<h2 class="text-base sm:text-lg lg:text-xl font-semibold text-sky-600 mt-2">${slide.subtitle}</h2>` : ''}
+                            <div class="mt-4 sm:mt-6 text-slate-700 text-sm sm:text-base lg:text-lg leading-relaxed space-y-2">${slide.content}</div>
+                        </div>
+                        <div class="hidden md:flex w-2/5 h-full items-center justify-center bg-slate-50 rounded-2xl overflow-hidden">
+                            ${visualHtml}
+                        </div>
                     </div>
                 </div>
             `;
             presentationContainer.innerHTML = slideHtml;
             
-            // Force reflow to restart animation
             const slideElement = document.getElementById(`slide-${index}`);
             slideElement.classList.remove('active');
             void slideElement.offsetWidth;
@@ -292,7 +301,7 @@ Validar(cdsDados.FieldByName('Nome').AsString = '', 'O campo Nome é obrigatóri
                 progressDotsContainer.appendChild(dot);
             });
         }
-
+        
         prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
         nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
         
