@@ -38,6 +38,50 @@
             align-items: center;
             justify-content: center;
         }
+
+        /* --- Custom Animations for Constant Movement --- */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes ping {
+             75%, 100% {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+        @keyframes pulse-glow {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 10px rgba(56, 189, 248, 0);
+            }
+            50% {
+                transform: scale(1.03);
+                box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-2px, 0px) rotate(1deg); }
+            30% { transform: translate(2px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-2px, 1px) rotate(0deg); }
+            70% { transform: translate(2px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+       .animate-spin-slow { animation: spin 8s linear infinite; }
+       .animate-float { animation: float 4s ease-in-out infinite; }
+       .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+       .animate-shake-short { animation: shake 0.8s cubic-bezier(.36,.07,.19,.97) both infinite; }
+       .animate-ping-slow { animation: ping 2.5s cubic-bezier(0, 0, 0.2, 1) infinite; }
     </style>
 </head>
 <body class="bg-slate-100 text-slate-800 flex flex-col items-center justify-center min-h-screen p-2 sm:p-4 overflow-hidden">
@@ -70,221 +114,221 @@
                 title: "Padrões de Desenvolvimento Domtec",
                 subtitle: "Procedimentos, Impacto e Qualidade de Código",
                 content: "Introdução ao ambiente de desenvolvimento.",
-                visual: () => `<div class="w-24 h-24 flex items-center justify-center bg-sky-50 rounded-full"><div class="w-16 h-16 bg-sky-600 rounded-lg shadow-inner transform rotate-45"></div></div>`
+                visual: () => `<div class="w-24 h-24 flex items-center justify-center bg-sky-50 rounded-full animate-float"><div class="w-16 h-16 bg-sky-600 rounded-lg shadow-inner transform rotate-45"></div></div>`
             },
             {
                 title: "Agenda do Treinamento",
                 subtitle: null,
                 content: `<ul class="list-none space-y-3">
-                    <li class="font-semibold text-slate-800">Parte 1: Análise de Riscos e Requisitos Técnicos</li>
-                    <ul class="list-disc list-inside space-y-2 pl-4 text-slate-600">
-                        <li>Contexto de Operação e Impacto Sistémico</li>
-                        <li>Análise de Escopo e Mapeamento de Dependências</li>
-                        <li>Requisitos de Interface e Usabilidade (UI/UX)</li>
-                        <li>Diretrizes Gerais e Padrões de Nomenclatura</li>
-                        <li>Protocolos de Colaboração e Mitigação de Riscos</li>
-                        <li>Ciclo de Desenvolvimento e Testes</li>
-                    </ul>
-                    <li class="font-semibold text-slate-800 pt-4">Parte 2: Padrões de Código em Ação</li>
-                </ul>`,
-                visual: () => `<div class="w-24 h-24 flex flex-col items-start justify-center space-y-2">
-                    <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-sky-600 rounded-sm"></div><div class="h-2 w-16 bg-slate-200 rounded-full"></div></div>
-                    <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-sky-600 rounded-sm"></div><div class="h-2 w-20 bg-slate-200 rounded-full"></div></div>
-                    <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-slate-300 rounded-sm"></div><div class="h-2 w-12 bg-slate-200 rounded-full"></div></div>
-                </div>`
+                        <li class="font-semibold text-slate-800">Parte 1: Análise de Riscos e Requisitos Técnicos</li>
+                        <ul class="list-disc list-inside space-y-2 pl-4 text-slate-600">
+                            <li>Contexto de Operação e Impacto Sistémico</li>
+                            <li>Análise de Escopo e Mapeamento de Dependências</li>
+                            <li>Requisitos de Interface e Usabilidade (UI/UX)</li>
+                            <li>Diretrizes Gerais e Padrões de Nomenclatura</li>
+                            <li>Protocolos de Colaboração e Mitigação de Riscos</li>
+                            <li>Ciclo de Desenvolvimento e Testes</li>
+                        </ul>
+                        <li class="font-semibold text-slate-800 pt-4">Parte 2: Padrões de Código em Ação</li>
+                    </ul>`,
+                visual: () => `<div class="w-24 h-24 flex flex-col items-start justify-center space-y-2 animate-pulse">
+                        <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-sky-600 rounded-sm"></div><div class="h-2 w-16 bg-slate-200 rounded-full"></div></div>
+                        <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-sky-600 rounded-sm"></div><div class="h-2 w-20 bg-slate-200 rounded-full"></div></div>
+                        <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-slate-300 rounded-sm"></div><div class="h-2 w-12 bg-slate-200 rounded-full"></div></div>
+                    </div>`
             },
             {
                 title: "Contexto de Operação e Impacto Sistémico",
                 subtitle: "A responsabilidade técnica do nosso software",
                 content: `<ul class="list-disc list-inside space-y-2">
-                    <li>O Yzidro ERP é um sistema para a operação completa de uma empresa, atingindo toda a cadeia de suprimentos, logística, vendas e financeiro, ou seja, um sistema complexo.</li>
-                    <li>Uma falha técnica não é um bug isolado; representa um risco direto à operação do cliente.</li>
-                    <li>O impacto de cada alteração deve ser avaliado sob a ótica da continuidade do negócio do cliente.</li>
-                </ul>`,
+                        <li>O Yzidro ERP é um sistema para a operação completa de uma empresa, atingindo toda a cadeia de suprimentos, logística, vendas e financeiro, ou seja, um sistema complexo.</li>
+                        <li>Uma falha técnica não é um bug isolado; representa um risco direto à operação do cliente.</li>
+                        <li>O impacto de cada alteração deve ser avaliado sob a ótica da continuidade do negócio do cliente.</li>
+                    </ul>`,
                 visual: () => `<div class="w-24 h-24 relative flex items-center justify-center">
-                    <div class="absolute w-full h-full rounded-full bg-sky-100 animate-ping opacity-50"></div>
-                    <div class="absolute w-2/3 h-2/3 rounded-full bg-sky-200"></div>
-                    <div class="absolute w-1/3 h-1/3 rounded-full bg-sky-600"></div>
-                </div>`
+                        <div class="absolute w-full h-full rounded-full bg-sky-100 animate-ping-slow"></div>
+                        <div class="absolute w-2/3 h-2/3 rounded-full bg-sky-200 animate-ping-slow" style="animation-delay: 0.5s;"></div>
+                        <div class="absolute w-1/3 h-1/3 rounded-full bg-sky-600"></div>
+                    </div>`
             },
             {
                 title: "Análise de Requisitos: O 'Porquê' Técnico",
                 subtitle: "O procedimento padrão antes da codificação",
                 content: `É importante que o desenvolvedor compreenda tecnicamente o requisito antes de iniciar a implementação. Questione até entender:
-                <ul class="list-disc list-inside space-y-2 mt-4 italic text-slate-600">
-                    <li>Qual processo de negócio esta funcionalidade automatiza?</li>
-                    <li>Qual é a regra de negócio específica que rege esta implementação?</li>
-                    <li>Quais outros módulos do sistema são afetados por esta alteração?</li>
-                </ul>
-                <p class="mt-4 font-semibold">Se houver dúvidas, o desenvolvedor deve saná-las antes de prosseguir.</p>`,
+                    <ul class="list-disc list-inside space-y-2 mt-4 italic text-slate-600">
+                        <li>Qual processo de negócio esta funcionalidade automatiza?</li>
+                        <li>Qual é a regra de negócio específica que rege esta implementação?</li>
+                        <li>Quais outros módulos do sistema são afetados por esta alteração?</li>
+                    </ul>
+                    <p class="mt-4 font-semibold">Se houver dúvidas, o desenvolvedor deve saná-las antes de prosseguir.</p>`,
                  visual: () => `<div class="w-28 h-28 flex items-center justify-center relative">
-                    <div class="absolute text-6xl text-sky-200 font-bold">?</div>
-                    <div class="w-24 h-24 border-8 border-slate-700 rounded-full flex items-center justify-center text-4xl text-slate-700 font-bold"></div>
-                 </div>`
+                        <div class="absolute text-6xl text-sky-200 font-bold animate-float" style="animation-duration: 3s;">?</div>
+                        <div class="w-24 h-24 border-8 border-slate-700 rounded-full flex items-center justify-center text-4xl text-slate-700 font-bold"></div>
+                   </div>`
             },
             {
                 title: "Requisitos de Interface (UI/UX)",
                 subtitle: "Usabilidade como um fator de qualidade funcional",
                 content: `A interface é um componente funcional do sistema. Sua eficiência impacta diretamente a produtividade do usuário.
-                <p class="font-semibold mt-4 mb-2">Checklist de Análise de UI:</p>
-                <ul class="list-disc list-inside space-y-2">
-                    <li>O fluxo de dados na tela é lógico e sequencial?</li>
-                    <li>Os componentes de ação estão posicionados de forma a minimizar erros?</li>
-                    <li>Processos já existentes que serão refeitos precisam ser pensados para minimizar o impacto em quem já usava da forma antiga.</li>
-                </ul>`,
+                    <p class="font-semibold mt-4 mb-2">Checklist de Análise de UI:</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>O fluxo de dados na tela é lógico e sequencial?</li>
+                        <li>Os componentes de ação estão posicionados de forma a minimizar erros?</li>
+                        <li>Processos já existentes que serão refeitos precisam ser pensados para minimizar o impacto em quem já usava da forma antiga.</li>
+                    </ul>`,
                 visual: () => `<div class="w-28 h-24 bg-slate-100 rounded-lg p-2 space-y-2 shadow-inner">
-                    <div class="h-4 w-full bg-slate-300 rounded"></div>
-                    <div class="flex space-x-2">
-                        <div class="h-10 w-1/3 bg-slate-200 rounded"></div>
-                        <div class="h-10 w-2/3 bg-white rounded border border-slate-300"></div>
-                    </div>
-                    <div class="flex justify-end"><div class="h-4 w-8 bg-sky-600 rounded"></div></div>
-                </div>`
+                        <div class="h-4 w-full bg-slate-300 rounded"></div>
+                        <div class="flex space-x-2">
+                            <div class="h-10 w-1/3 bg-slate-200 rounded"></div>
+                            <div class="h-10 w-2/3 bg-white rounded border border-slate-300"></div>
+                        </div>
+                        <div class="flex justify-end"><div class="h-4 w-8 bg-sky-600 rounded animate-pulse"></div></div>
+                    </div>`
             },
             {
                 title: "Diretrizes Gerais de Implementação",
                 subtitle: "Padronizações básicas para o desenvolvimento",
                 content: `<ul class="list-disc list-inside space-y-2 text-sm sm:text-base">
-                    <li><span class="font-bold">VALIDAÇÕES PRIMEIRO:</span> Validações de dados devem vir ANTES de perguntas de confirmação ou checagem de permissões.</li>
-                    <li><span class="font-bold">EVITAR MÚLTIPLAS MENSAGENS:</span> Combine confirmações quando possível. (Ex: "Baixa realizada. Deseja imprimir recibo?").</li>
-                    <li><span class="font-bold">FEEDBACK VISUAL:</span> Use "Aguardar Ligado" em processos que podem demorar para informar ao usuário que o sistema está trabalhando.</li>
-                    <li><span class="font-bold">AUDITORIA:</span> Sempre que possível, implemente auditoria de acesso nos processos para facilitar o rastreamento pelo suporte.</li>
-                </ul>`,
-                visual: () => `<div class="w-28 h-24 flex flex-col justify-center items-start space-y-2">
-                    <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-sky-600 rounded-sm"></div><div class="h-2 w-16 bg-slate-200 rounded-full"></div></div>
-                    <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-sky-600 rounded-sm"></div><div class="h-2 w-20 bg-slate-200 rounded-full"></div></div>
-                    <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-sky-600 rounded-sm"></div><div class="h-2 w-12 bg-slate-200 rounded-full"></div></div>
-                 </div>`
+                        <li><span class="font-bold">VALIDAÇÕES PRIMEIRO:</span> Validações de dados devem vir ANTES de perguntas de confirmação ou checagem de permissões.</li>
+                        <li><span class="font-bold">EVITAR MÚLTIPLAS MENSAGENS:</span> Combine confirmações quando possível. (Ex: "Baixa realizada. Deseja imprimir recibo?").</li>
+                        <li><span class="font-bold">FEEDBACK VISUAL:</span> Use "Aguardar Ligado" em processos que podem demorar para informar ao usuário que o sistema está trabalhando.</li>
+                        <li><span class="font-bold">AUDITORIA:</span> Sempre que possível, implemente auditoria de acesso nos processos para facilitar o rastreamento pelo suporte.</li>
+                    </ul>`,
+                visual: () => `<div class="w-28 h-24 flex flex-col justify-center items-start space-y-2 animate-pulse">
+                        <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-sky-600 rounded-sm"></div><div class="h-2 w-16 bg-slate-200 rounded-full"></div></div>
+                        <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-sky-600 rounded-sm"></div><div class="h-2 w-20 bg-slate-200 rounded-full"></div></div>
+                        <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-sky-600 rounded-sm"></div><div class="h-2 w-12 bg-slate-200 rounded-full"></div></div>
+                   </div>`
             },
             {
                 title: "Padrões de Nomenclatura",
                 subtitle: "Clareza e consistência no código fonte",
                 content: `Usamos prefixos para identificar o tipo de variáveis e componentes, facilitando a leitura e manutenção.
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-4 text-sm">
-                    <p><span class="font-bold text-sky-700">i</span>: Inteiro</p>
-                    <p><span class="font-bold text-sky-700">c</span>: Caracter</p>
-                    <p><span class="font-bold text-sky-700">d</span>: Data</p>
-                    <p><span class="font-bold text-sky-700">edt</span>: Edit</p>
-                    <p><span class="font-bold text-sky-700">btn</span>: Button</p>
-                    <p><span class="font-bold text-sky-700">cds</span>: ClientDataSet</p>
-                </div>`,
-                 visual: () => `<div class="w-28 h-24 bg-slate-800 rounded-lg p-2 font-mono text-white text-xs">
-                    <p><span class="text-sky-400">i</span>CodUsuario</p>
-                    <p><span class="text-sky-400">c</span>NomeCliente</p>
-                    <p><span class="text-sky-400">btn</span>Salvar</p>
-                    <p><span class="text-sky-400">edt</span>Endereco</p>
-                 </div>`
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-4 text-sm">
+                        <p><span class="font-bold text-sky-700">i</span>: Inteiro</p>
+                        <p><span class="font-bold text-sky-700">c</span>: Caracter</p>
+                        <p><span class="font-bold text-sky-700">d</span>: Data</p>
+                        <p><span class="font-bold text-sky-700">edt</span>: Edit</p>
+                        <p><span class="font-bold text-sky-700">btn</span>: Button</p>
+                        <p><span class="font-bold text-sky-700">cds</span>: ClientDataSet</p>
+                    </div>`,
+                 visual: () => `<div class="w-28 h-24 bg-slate-800 rounded-lg p-2 font-mono text-white text-xs animate-pulse-glow">
+                        <p><span class="text-sky-400">i</span>CodUsuario</p>
+                        <p><span class="text-sky-400">c</span>NomeCliente</p>
+                        <p><span class="text-sky-400">btn</span>Salvar</p>
+                        <p><span class="text-sky-400">edt</span>Endereco</p>
+                   </div>`
             },
             {
                 title: "Protocolo de Consulta Técnica",
                 subtitle: "Mitigação de riscos através da revisão por pares",
                 content: `<ul class="list-disc list-inside space-y-2">
-                    <li>A consulta a desenvolvedores mais seniores, Tech Leads, ou ao gestor da área é um passo padrão no processo.</li>
-                    <li>Incerteza técnica deve ser tratada como um risco ao projeto.</li>
-                    <li>A revisão de código e a consulta prévia são ferramentas para garantir a qualidade, não uma avaliação de performance individual.</li>
-                </ul>`,
+                        <li>A consulta a desenvolvedores mais seniores, Tech Leads, ou ao gestor da área é um passo padrão no processo.</li>
+                        <li>Incerteza técnica deve ser tratada como um risco ao projeto.</li>
+                        <li>A revisão de código e a consulta prévia são ferramentas para garantir a qualidade, não uma avaliação de performance individual.</li>
+                    </ul>`,
                 visual: () => `<div class="w-28 h-24 flex items-center justify-center -space-x-4">
-                    <div class="w-16 h-16 rounded-full bg-slate-700 flex items-center justify-center text-white font-bold text-lg">DEV</div>
-                    <div class="w-16 h-16 rounded-full bg-sky-600 flex items-center justify-center text-white font-bold text-lg ring-4 ring-white">LEAD</div>
-                </div>`
+                        <div class="w-16 h-16 rounded-full bg-slate-700 flex items-center justify-center text-white font-bold text-lg">DEV</div>
+                        <div class="w-16 h-16 rounded-full bg-sky-600 flex items-center justify-center text-white font-bold text-lg ring-4 ring-white animate-pulse-glow">LEAD</div>
+                    </div>`
             },
             {
                 title: "Documentação e Checklist de Testes",
                 subtitle: "Garantindo a qualidade da entrega",
                 content: `<ul class="list-disc list-inside space-y-2">
-                    <li>A documentação e os checklists de teste são parte da entrega técnica.</li>
-                    <li>Mais importante que apenas criar, é garantir que o material seja <strong>funcional e completo</strong>.</li>
-                    <li>O objetivo é não deixar brechas para o time de qualidade, evitando a omissão de informações que possam ocasionar erros em produção.</li>
-                </ul>`,
+                        <li>A documentação e os checklists de teste são parte da entrega técnica.</li>
+                        <li>Mais importante que apenas criar, é garantir que o material seja <strong>funcional e completo</strong>.</li>
+                        <li>O objetivo é não deixar brechas para o time de qualidade, evitando a omissão de informações que possam ocasionar erros em produção.</li>
+                    </ul>`,
                  visual: () => `<div class="w-28 h-24 flex flex-col justify-center items-start space-y-2">
-                    <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-green-500 rounded-full"></div><div class="h-2 w-16 bg-slate-200 rounded-full"></div></div>
-                    <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-green-500 rounded-full"></div><div class="h-2 w-20 bg-slate-200 rounded-full"></div></div>
-                    <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-red-500 rounded-full"></div><div class="h-2 w-12 bg-slate-200 rounded-full"></div></div>
-                 </div>`
+                        <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-green-500 rounded-full"></div><div class="h-2 w-16 bg-slate-200 rounded-full"></div></div>
+                        <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-green-500 rounded-full"></div><div class="h-2 w-20 bg-slate-200 rounded-full"></div></div>
+                        <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div><div class="h-2 w-12 bg-slate-200 rounded-full"></div></div>
+                   </div>`
             },
              {
                 title: "O Ciclo de Testes do Desenvolvedor",
                 subtitle: "Fixando o conhecimento e minimizando erros",
                 content: `<ul class="list-disc list-inside space-y-2">
-                    <li>Além de entender o processo e desenvolver a solução, é fundamental que o próprio desenvolvedor <strong>teste exaustivamente</strong> o recurso criado.</li>
-                    <li>Este ciclo de auto-teste minimiza erros básicos antes de chegar ao time de qualidade.</li>
-                    <li>Mais importante ainda, testar o que você construiu é a melhor forma de <strong>fixar o processo e o entendimento</strong> da regra de negócio na prática.</li>
-                </ul>`,
+                        <li>Além de entender o processo e desenvolver a solução, é fundamental que o próprio desenvolvedor <strong>teste exaustivamente</strong> o recurso criado.</li>
+                        <li>Este ciclo de auto-teste minimiza erros básicos antes de chegar ao time de qualidade.</li>
+                        <li>Mais importante ainda, testar o que você construiu é a melhor forma de <strong>fixar o processo e o entendimento</strong> da regra de negócio na prática.</li>
+                    </ul>`,
                  visual: () => `<div class="w-32 h-24 flex items-center justify-center space-x-2">
-                    <div class="text-4xl">💻</div>
-                    <div class="text-2xl text-slate-400">→</div>
-                    <div class="text-4xl">🔬</div>
-                    <div class="text-2xl text-slate-400">→</div>
-                    <div class="text-4xl">✅</div>
-                 </div>`
+                        <div class="text-4xl">💻</div>
+                        <div class="text-2xl text-slate-400">→</div>
+                        <div class="text-4xl">🔬</div>
+                        <div class="text-2xl text-slate-400">→</div>
+                        <div class="text-4xl animate-float">✅</div>
+                   </div>`
             },
             {
                 title: "Padrões de Código: A Teoria na Prática",
                 subtitle: "Como materializamos os requisitos de qualidade em código",
                 content: "As `units` de utilitários que usamos são a implementação dos nossos padrões de desenvolvimento. Elas existem para garantir que os princípios de impacto, usabilidade e regras de negócio sejam aplicados de forma consistente e auditável no código-fonte.",
                 visual: () => `<div class="w-32 h-24 flex items-center justify-center space-x-4">
-                    <div class="text-5xl text-slate-700">⚙️</div>
-                    <div class="text-3xl text-slate-300">➔</div>
-                    <div class="text-5xl text-sky-600">📄</div>
-                 </div>`
+                        <div class="text-5xl text-slate-700 animate-spin-slow">⚙️</div>
+                        <div class="text-3xl text-slate-300">➔</div>
+                        <div class="text-5xl text-sky-600">📄</div>
+                   </div>`
             },
             {
                 title: "Estudo de Caso: Comunicação com Usuário",
                 subtitle: "Implementação com `pMensagem`, `MensagemFalha`, `MensagemAtencao`",
                 content: `<p class="mb-2"><span class="font-bold">O Requisito:</span> A comunicação com o usuário deve ser clara, consistente e funcional.</p>
-                <p class="mb-4"><span class="font-bold">A Implementação Padrão:</span> Funções que garantem o padrão visual e guiam o usuário.</p>
-                <pre class="bg-slate-800 text-white p-4 rounded-lg text-sm fira-code whitespace-pre-wrap"><code class="language-delphi">// Mensagem com alerta sonoro e visual para chamar a atenção do usuário.
+                    <p class="mb-4"><span class="font-bold">A Implementação Padrão:</span> Funções que garantem o padrão visual e guiam o usuário.</p>
+                    <pre class="bg-slate-800 text-white p-4 rounded-lg text-sm fira-code whitespace-pre-wrap"><code class="language-delphi">// Mensagem com alerta sonoro e visual para chamar a atenção do usuário.
 MensagemAtencao(lCondicao, 'Atenção!', edtCampoFocado);
 
 // Foca em levar o usuário à SOLUÇÃO, não apenas em informar o erro.
 MensagemFalha('Produto não informado!', nil, edtCodProduto);</code></pre>`,
                 visual: () => `<div class="w-28 h-24 bg-white border border-slate-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-2">
-                    <div class="text-3xl">⚠️</div>
-                    <div class="text-xs text-center font-semibold text-slate-700 mt-1">Atenção!</div>
-                    <div class="w-12 h-5 bg-sky-600 rounded mt-2"></div>
-                </div>`
+                        <div class="text-3xl animate-shake-short">⚠️</div>
+                        <div class="text-xs text-center font-semibold text-slate-700 mt-1">Atenção!</div>
+                        <div class="w-12 h-5 bg-sky-600 rounded mt-2 animate-pulse" style="animation-delay: 0.5s;"></div>
+                    </div>`
             },
             {
                 title: "Estudo de Caso: Validação de Dados",
                 subtitle: "Implementação com `Validar`",
                 content: `<p class="mb-2"><span class="font-bold">O Requisito:</span> Regras de negócio devem ser explícitas e centralizadas para mitigar riscos.</p>
-                <p class="mb-4"><span class="font-bold">A Implementação Padrão:</span> A função \`Validar\` serve como documentação auditável da regra de negócio, evitando lógicas implícitas (\`if\`s) espalhadas.</p>
-                <pre class="bg-slate-800 text-white p-4 rounded-lg text-sm fira-code whitespace-pre-wrap"><code class="language-delphi">// Documenta a regra "O nome do cliente é obrigatório" em um ponto único.
+                    <p class="mb-4"><span class="font-bold">A Implementação Padrão:</span> A função \`Validar\` serve como documentação auditável da regra de negócio, evitando lógicas implícitas (\`if\`s) espalhadas.</p>
+                    <pre class="bg-slate-800 text-white p-4 rounded-lg text-sm fira-code whitespace-pre-wrap"><code class="language-delphi">// Documenta a regra "O nome do cliente é obrigatório" em um ponto único.
 Validar(cdsDados.FieldByName('Nome').AsString = '', 'O campo Nome é obrigatório!', edtNome);</code></pre>`,
-                visual: () => `<div class="w-28 h-24 flex items-center justify-center">
-                    <div class="w-20 h-24 bg-sky-600 rounded-lg shadow-2xl flex items-center justify-center text-5xl text-white font-bold transform -rotate-6">✓</div>
-                </div>`
+                visual: () => `<div class="w-28 h-24 flex items-center justify-center animate-float">
+                        <div class="w-20 h-24 bg-sky-600 rounded-lg shadow-2xl flex items-center justify-center text-5xl text-white font-bold transform -rotate-6">✓</div>
+                    </div>`
             },
             {
                 title: "Estudo de Caso: Validação com Confirmação",
                 subtitle: "Implementação com `ValidarSimNao`",
                 content: `<p class="mb-2"><span class="font-bold">O Cenário:</span> Uma validação falha, mas o usuário pode optar por continuar.</p>
-                <p class="mb-4"><span class="font-bold">A Implementação Padrão:</span> A função \`ValidarSimNao\` combina uma validação com uma pergunta, dando controle ao usuário de forma segura.</p>
-                <pre class="bg-slate-800 text-white p-4 rounded-lg text-sm fira-code whitespace-pre-wrap"><code class="language-delphi">// Pergunta ao usuário se ele deseja ignorar um aviso e continuar.
+                    <p class="mb-4"><span class="font-bold">A Implementação Padrão:</span> A função \`ValidarSimNao\` combina uma validação com uma pergunta, dando controle ao usuário de forma segura.</p>
+                    <pre class="bg-slate-800 text-white p-4 rounded-lg text-sm fira-code whitespace-pre-wrap"><code class="language-delphi">// Pergunta ao usuário se ele deseja ignorar um aviso e continuar.
 ValidarSimNao(lCondicao, 'Item sem estoque, continuar mesmo assim?', edtProduto);</code></pre>`,
                 visual: () => `<div class="w-28 h-24 flex items-center justify-center relative">
-                    <div class="w-20 h-20 bg-sky-100 rounded-lg flex items-center justify-center text-4xl">?</div>
-                    <div class="absolute -bottom-2 -right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-2xl text-white shadow-lg">✓</div>
-                </div>`
+                        <div class="w-20 h-20 bg-sky-100 rounded-lg flex items-center justify-center text-4xl animate-pulse">?</div>
+                        <div class="absolute -bottom-2 -right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-2xl text-white shadow-lg animate-float" style="animation-delay: 0.3s;">✓</div>
+                    </div>`
             },
             {
                 title: "Conclusão: Engenharia de Software na Prática",
                 subtitle: null,
                 content: `A qualidade do nosso produto final é um resultado direto do rigor técnico aplicado em cada etapa do processo.
-                <div class="mt-6 p-4 bg-slate-50 border-l-4 border-sky-600 text-slate-800 font-semibold text-center rounded-r-lg">
-                    Análise de Requisitos + Padrões de Implementação = Software Robusto
-                </div>`,
+                    <div class="mt-6 p-4 bg-slate-50 border-l-4 border-sky-600 text-slate-800 font-semibold text-center rounded-r-lg">
+                        Análise de Requisitos + Padrões de Implementação = Software Robusto
+                    </div>`,
                 visual: () => `<div class="w-32 h-24 flex items-center justify-around">
-                     <div class="text-4xl">🎯</div>
-                     <div class="text-4xl">🏆</div>
-                     <div class="text-4xl">🚀</div>
-                </div>`
+                         <div class="text-4xl animate-float" style="animation-delay: 0s;">🎯</div>
+                         <div class="text-4xl animate-float" style="animation-delay: 0.25s;">🏆</div>
+                         <div class="text-4xl animate-shake-short" style="animation-delay: 0.5s;">🚀</div>
+                    </div>`
             },
             {
                 title: "Dúvidas e Perguntas",
                 subtitle: null,
                 content: "Espaço aberto para discussão e esclarecimentos.",
-                visual: () => `<div class="w-48"><img src="https://domtec.com.br/wp-content/uploads/2019/09/logo-cor.png" alt="Logo da Domtec Sistemas"></div>`
+                visual: () => `<div class="w-48 animate-pulse"><img src="https://domtec.com.br/wp-content/uploads/2019/09/logo-cor.png" alt="Logo da Domtec Sistemas" onerror="this.style.display='none'"></div>`
             }
         ];
 
@@ -317,13 +361,16 @@ ValidarSimNao(lCondicao, 'Item sem estoque, continuar mesmo assim?', edtProduto)
                         <div class="mt-4 sm:mt-6 text-slate-700 text-sm sm:text-base lg:text-lg leading-relaxed space-y-2">${slide.content}</div>
                     </div>
                     <div class="hidden md:flex w-2/5 h-full items-center justify-center bg-slate-50 rounded-2xl overflow-hidden">
-                        ${visualHtml}
+                        <div class="transform scale-125">
+                            ${visualHtml}
+                        </div>
                     </div>
                 </div>
             `;
             presentationContainer.innerHTML = slideHtml;
             
             const slideElement = document.getElementById(`slide-${index}`);
+            // Force reflow to restart animation
             slideElement.classList.remove('active');
             void slideElement.offsetWidth;
             slideElement.classList.add('active');
@@ -362,9 +409,13 @@ ValidarSimNao(lCondicao, 'Item sem estoque, continuar mesmo assim?', edtProduto)
         
         document.addEventListener('keydown', (e) => {
             if(e.key === 'ArrowRight') {
-                showSlide(currentSlide + 1);
+                if(document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                   showSlide(currentSlide + 1);
+                }
             } else if (e.key === 'ArrowLeft') {
-                showSlide(currentSlide - 1);
+                 if(document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                    showSlide(currentSlide - 1);
+                 }
             }
         });
 
