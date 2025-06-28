@@ -20,6 +20,8 @@
         .slide {
             display: none;
             animation: fadeIn 0.6s ease-in-out;
+            width: 100%;
+            height: 100%;
         }
         .slide.active {
             display: flex;
@@ -31,19 +33,24 @@
         .progress-dot {
             transition: background-color 0.3s ease;
         }
+        #presentation-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body class="bg-slate-100 text-slate-800 flex flex-col items-center justify-center min-h-screen p-2 sm:p-4 overflow-hidden">
 
-    <main id="presentation-container" class="w-full max-w-5xl h-auto min-h-[550px] md:h-[80vh] md:max-h-[700px] bg-white rounded-2xl shadow-2xl flex flex-col p-6 sm:p-8 md:p-12 overflow-hidden transition-all duration-300">
+    <main id="presentation-container" class="w-full max-w-5xl h-[85vh] max-h-[800px] bg-white rounded-2xl shadow-2xl flex flex-col p-6 sm:p-8 md:p-12 overflow-hidden transition-all duration-300">
         
     </main>
 
-    <footer class="w-full max-w-5xl mt-4 sm:mt-6 flex flex-col sm:flex-row items-center justify-between gap-y-4">
-        <div class="w-full sm:w-1/3 order-2 sm:order-1 text-center sm:text-left">
+    <footer class="w-full max-w-5xl mt-4 sm:mt-6 flex items-center justify-between gap-y-4">
+        <div class="w-1/3 text-left">
              <span id="slide-counter" class="text-sm font-semibold text-slate-500"></span>
         </div>
-        <div class="w-full sm:w-1/3 order-1 sm:order-2 flex items-center justify-center space-x-4">
+        <div class="w-1/3 flex items-center justify-center space-x-4">
             <button id="prev-btn" class="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md text-slate-700 hover:bg-slate-50 transition disabled:opacity-50 disabled:cursor-not-allowed">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>
             </button>
@@ -52,8 +59,8 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
             </button>
         </div>
-        <div class="w-full sm:w-1/3 order-3 flex justify-center sm:justify-end mt-2 sm:mt-0">
-            <!-- Fullscreen button removed -->
+        <div class="w-1/3">
+            <!-- Placeholder -->
         </div>
     </footer>
 
@@ -74,10 +81,11 @@
                         <li>Contexto de Operação e Impacto Sistémico</li>
                         <li>Análise de Escopo e Mapeamento de Dependências</li>
                         <li>Requisitos de Interface e Usabilidade (UI/UX)</li>
+                        <li>Diretrizes Gerais e Padrões de Nomenclatura</li>
                         <li>Protocolos de Colaboração e Mitigação de Riscos</li>
                         <li>Ciclo de Desenvolvimento e Testes</li>
                     </ul>
-                    <li class="font-semibold text-slate-800 pt-4">Parte 2: Padrões de Código em Ação (Exemplos Práticos)</li>
+                    <li class="font-semibold text-slate-800 pt-4">Parte 2: Padrões de Código em Ação</li>
                 </ul>`,
                 visual: () => `<div class="w-24 h-24 flex flex-col items-start justify-center space-y-2">
                     <div class="flex items-center space-x-2"><div class="w-4 h-4 bg-sky-600 rounded-sm"></div><div class="h-2 w-16 bg-slate-200 rounded-full"></div></div>
@@ -134,6 +142,40 @@
                 </div>`
             },
             {
+                title: "Diretrizes Gerais de Implementação",
+                subtitle: "Padronizações básicas para o desenvolvimento",
+                content: `<ul class="list-disc list-inside space-y-2 text-sm sm:text-base">
+                    <li><span class="font-bold">VALIDAÇÕES PRIMEIRO:</span> Validações de dados devem vir ANTES de perguntas de confirmação ou checagem de permissões.</li>
+                    <li><span class="font-bold">EVITAR MÚLTIPLAS MENSAGENS:</span> Combine confirmações quando possível. (Ex: "Baixa realizada. Deseja imprimir recibo?").</li>
+                    <li><span class="font-bold">FEEDBACK VISUAL:</span> Use "Aguardar Ligado" em processos que podem demorar para informar ao usuário que o sistema está trabalhando.</li>
+                    <li><span class="font-bold">AUDITORIA:</span> Sempre que possível, implemente auditoria de acesso nos processos para facilitar o rastreamento pelo suporte.</li>
+                </ul>`,
+                visual: () => `<div class="w-28 h-24 flex flex-col justify-center items-start space-y-2">
+                    <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-sky-600 rounded-sm"></div><div class="h-2 w-16 bg-slate-200 rounded-full"></div></div>
+                    <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-sky-600 rounded-sm"></div><div class="h-2 w-20 bg-slate-200 rounded-full"></div></div>
+                    <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-sky-600 rounded-sm"></div><div class="h-2 w-12 bg-slate-200 rounded-full"></div></div>
+                 </div>`
+            },
+            {
+                title: "Padrões de Nomenclatura",
+                subtitle: "Clareza e consistência no código fonte",
+                content: `Usamos prefixos para identificar o tipo de variáveis e componentes, facilitando a leitura e manutenção.
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-4 text-sm">
+                    <p><span class="font-bold text-sky-700">i</span>: Inteiro</p>
+                    <p><span class="font-bold text-sky-700">c</span>: Caracter</p>
+                    <p><span class="font-bold text-sky-700">d</span>: Data</p>
+                    <p><span class="font-bold text-sky-700">edt</span>: Edit</p>
+                    <p><span class="font-bold text-sky-700">btn</span>: Button</p>
+                    <p><span class="font-bold text-sky-700">cds</span>: ClientDataSet</p>
+                </div>`,
+                 visual: () => `<div class="w-28 h-24 bg-slate-800 rounded-lg p-2 font-mono text-white text-xs">
+                    <p><span class="text-sky-400">i</span>CodUsuario</p>
+                    <p><span class="text-sky-400">c</span>NomeCliente</p>
+                    <p><span class="text-sky-400">btn</span>Salvar</p>
+                    <p><span class="text-sky-400">edt</span>Endereco</p>
+                 </div>`
+            },
+            {
                 title: "Protocolo de Consulta Técnica",
                 subtitle: "Mitigação de riscos através da revisão por pares",
                 content: `<ul class="list-disc list-inside space-y-2">
@@ -187,27 +229,42 @@
                  </div>`
             },
             {
-                title: "Estudo de Caso: Padrão de Comunicação com Usuário",
-                subtitle: "Implementação com `pMensagem` & `MensagemFalha`",
-                content: `<p class="mb-2"><span class="font-bold">O Requisito (do Slide 5):</span> A comunicação com o usuário deve ser clara e funcional.</p>
-                <p class="mb-4"><span class="font-bold">A Implementação Padrão:</span> Estas funções garantem a consistência visual e funcional. O objetivo é guiar o usuário de forma produtiva.</p>
-                <pre class="bg-slate-800 text-white p-4 rounded-lg text-sm fira-code whitespace-pre-wrap"><code class="language-delphi">// O padrão foca em levar o usuário à SOLUÇÃO (focando o edtCodProduto).
+                title: "Estudo de Caso: Comunicação com Usuário",
+                subtitle: "Implementação com `pMensagem`, `MensagemFalha`, `MensagemAtencao`",
+                content: `<p class="mb-2"><span class="font-bold">O Requisito:</span> A comunicação com o usuário deve ser clara, consistente e funcional.</p>
+                <p class="mb-4"><span class="font-bold">A Implementação Padrão:</span> Funções que garantem o padrão visual e guiam o usuário.</p>
+                <pre class="bg-slate-800 text-white p-4 rounded-lg text-sm fira-code whitespace-pre-wrap"><code class="language-delphi">// Mensagem com alerta sonoro e visual para chamar a atenção do usuário.
+MensagemAtencao(lCondicao, 'Atenção!', edtCampoFocado);
+
+// Foca em levar o usuário à SOLUÇÃO, não apenas em informar o erro.
 MensagemFalha('Produto não informado!', nil, edtCodProduto);</code></pre>`,
                 visual: () => `<div class="w-28 h-24 bg-white border border-slate-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-2">
                     <div class="text-3xl">⚠️</div>
-                    <div class="text-xs text-center font-semibold text-slate-700 mt-1">Produto não informado!</div>
+                    <div class="text-xs text-center font-semibold text-slate-700 mt-1">Atenção!</div>
                     <div class="w-12 h-5 bg-sky-600 rounded mt-2"></div>
                 </div>`
             },
             {
-                title: "Estudo de Caso: Padrão de Validação de Dados",
-                subtitle: "Implementação com `Validar` & `ValidarSimNao`",
-                content: `<p class="mb-2"><span class="font-bold">O Requisito (dos Slides 4):</span> Regras de negócio devem ser explícitas e centralizadas para mitigar riscos.</p>
+                title: "Estudo de Caso: Validação de Dados",
+                subtitle: "Implementação com `Validar`",
+                content: `<p class="mb-2"><span class="font-bold">O Requisito:</span> Regras de negócio devem ser explícitas e centralizadas para mitigar riscos.</p>
                 <p class="mb-4"><span class="font-bold">A Implementação Padrão:</span> A função \`Validar\` serve como documentação auditável da regra de negócio, evitando lógicas implícitas (\`if\`s) espalhadas.</p>
-                <pre class="bg-slate-800 text-white p-4 rounded-lg text-sm fira-code whitespace-pre-wrap"><code class="language-delphi">// Documenta a regra "O nome do cliente é obrigatório" em um ponto único e padronizado.
+                <pre class="bg-slate-800 text-white p-4 rounded-lg text-sm fira-code whitespace-pre-wrap"><code class="language-delphi">// Documenta a regra "O nome do cliente é obrigatório" em um ponto único.
 Validar(cdsDados.FieldByName('Nome').AsString = '', 'O campo Nome é obrigatório!', edtNome);</code></pre>`,
                 visual: () => `<div class="w-28 h-24 flex items-center justify-center">
                     <div class="w-20 h-24 bg-sky-600 rounded-lg shadow-2xl flex items-center justify-center text-5xl text-white font-bold transform -rotate-6">✓</div>
+                </div>`
+            },
+            {
+                title: "Estudo de Caso: Validação com Confirmação",
+                subtitle: "Implementação com `ValidarSimNao`",
+                content: `<p class="mb-2"><span class="font-bold">O Cenário:</span> Uma validação falha, mas o usuário pode optar por continuar.</p>
+                <p class="mb-4"><span class="font-bold">A Implementação Padrão:</span> A função \`ValidarSimNao\` combina uma validação com uma pergunta, dando controle ao usuário de forma segura.</p>
+                <pre class="bg-slate-800 text-white p-4 rounded-lg text-sm fira-code whitespace-pre-wrap"><code class="language-delphi">// Pergunta ao usuário se ele deseja ignorar um aviso e continuar.
+ValidarSimNao(lCondicao, 'Item sem estoque, continuar mesmo assim?', edtProduto);</code></pre>`,
+                visual: () => `<div class="w-28 h-24 flex items-center justify-center relative">
+                    <div class="w-20 h-20 bg-sky-100 rounded-lg flex items-center justify-center text-4xl">?</div>
+                    <div class="absolute -bottom-2 -right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-2xl text-white shadow-lg">✓</div>
                 </div>`
             },
             {
@@ -250,19 +307,17 @@ Validar(cdsDados.FieldByName('Nome').AsString = '', 'O campo Nome é obrigatóri
             const visualHtml = createVisual(slide);
             
             const slideHtml = `
-                <div id="slide-${index}" class="slide w-full h-full flex flex-col items-center justify-center overflow-y-auto">
-                    <div class="md:hidden flex-shrink-0 mb-6 flex items-center justify-center h-24">
+                <div id="slide-${index}" class="slide w-full h-full flex flex-col md:flex-row items-center justify-center overflow-y-auto">
+                    <div class="flex-shrink-0 md:hidden mb-6 flex items-center justify-center h-24">
                         ${visualHtml}
                     </div>
-                    <div class="w-full h-full flex flex-col md:flex-row items-center justify-center">
-                        <div class="w-full md:w-3/5 h-full flex flex-col justify-center pr-0 md:pr-10 text-center md:text-left">
-                            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900">${slide.title}</h1>
-                            ${slide.subtitle ? `<h2 class="text-base sm:text-lg lg:text-xl font-semibold text-sky-600 mt-2">${slide.subtitle}</h2>` : ''}
-                            <div class="mt-4 sm:mt-6 text-slate-700 text-sm sm:text-base lg:text-lg leading-relaxed space-y-2">${slide.content}</div>
-                        </div>
-                        <div class="hidden md:flex w-2/5 h-full items-center justify-center bg-slate-50 rounded-2xl overflow-hidden">
-                            ${visualHtml}
-                        </div>
+                    <div class="w-full h-full flex flex-col justify-center text-center md:text-left md:w-3/5 md:pr-10">
+                        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900">${slide.title}</h1>
+                        ${slide.subtitle ? `<h2 class="text-base sm:text-lg lg:text-xl font-semibold text-sky-600 mt-2">${slide.subtitle}</h2>` : ''}
+                        <div class="mt-4 sm:mt-6 text-slate-700 text-sm sm:text-base lg:text-lg leading-relaxed space-y-2">${slide.content}</div>
+                    </div>
+                    <div class="hidden md:flex w-2/5 h-full items-center justify-center bg-slate-50 rounded-2xl overflow-hidden">
+                        ${visualHtml}
                     </div>
                 </div>
             `;
